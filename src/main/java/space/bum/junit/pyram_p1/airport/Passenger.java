@@ -16,4 +16,22 @@ public class Passenger {
   // @formatter:on
   private Pattern pattern;
 
+  public Passenger(String identifier, String name, String countryCode) {
+    super();
+
+    pattern = countryCode.equals("KR") ? Pattern.compile(rrnRegex)
+        : Pattern.compile(nonKrRrnRegex);
+    Matcher matcher = pattern.matcher(identifier);
+    if (!matcher.matches()) {
+      throw new RuntimeException("아이디 오류");
+    }
+
+    if (!Arrays.asList(Locale.getISOCountries()).contains(countryCode)) {
+      throw new RuntimeException("국가 코드 오류");
+    }
+
+    this.identifier = identifier;
+    this.name = name;
+    this.countryCode = countryCode;
+  }
 }
