@@ -55,4 +55,23 @@ public class Passenger {
   public void setName(String name) {
     this.name = name;
   }
+
+  public String getCountryCode() {
+    return countryCode;
+  }
+
+  public void setCountryCode(String countryCode) {
+    if (!Arrays.asList(Locale.getISOCountries()).contains(countryCode)) {
+      throw new RuntimeException("국가 코드 오류");
+    }
+
+    this.countryCode = countryCode;
+  }
+
+  // @formatter:off
+  @Override
+  public String toString() {
+    return "승객: " + getName() + ", 아이디: " + getIdentifier()
+            + ", 출신국: " + getCountryCode();
+  }
 }
