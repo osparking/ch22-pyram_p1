@@ -34,4 +34,25 @@ public class Passenger {
     this.name = name;
     this.countryCode = countryCode;
   }
+
+  public String getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(String identifier) {
+    Matcher matcher = pattern.matcher(identifier);
+    if (!matcher.matches()) {
+      throw new RuntimeException("아이디 오류");
+    }
+
+    this.identifier = identifier;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
