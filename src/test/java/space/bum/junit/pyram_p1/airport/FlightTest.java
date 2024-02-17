@@ -12,6 +12,29 @@ import org.junit.jupiter.api.Test;
 class FlightTest {
 
   @Test
+  @DisplayName("탑승객 수 미달 좌석배정 실패 시험")
+  public void testSetInvalidSeats() {
+    Flight flight = new Flight("AA1234", 50);
+    flight.setOrigin("청주");
+    flight.setDestination("상하이");
+    IntStream.range(0, flight.getSeats()).forEach(i -> flight.addPassenger());
+    assertEquals(50, flight.getPassengers());
+    assertThrows(RuntimeException.class, () -> flight.setSeats(49));
+  }
+
+  @Test
+  @DisplayName("탑승객 수 초과 좌석배정 성공 시험")
+  public void testSetValidSeats() {
+    Flight flight = new Flight("AA1234", 50);
+    flight.setOrigin("London");
+    flight.setDestination("Bucharest");
+    IntStream.range(0, flight.getSeats()).forEach(i -> flight.addPassenger());
+    assertEquals(50, flight.getPassengers());
+    flight.setSeats(52);
+    assertEquals(52, flight.getSeats());
+  }
+
+  @Test
   @DisplayName("비운의 대한항공 항공편 번호 정당함 시험")
   public void testFlightCreation() {
     Flight flight = new Flight("KE007", 100);
