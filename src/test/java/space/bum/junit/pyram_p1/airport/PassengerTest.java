@@ -1,6 +1,7 @@
 package space.bum.junit.pyram_p1.airport;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,19 @@ class PassengerTest {
   public void testNonUsPassengerCreation() {
     Passenger passenger = new Passenger("201001-6234567", "러순녀", "RU");
     assertNotNull(passenger);
+  }
+
+  @Test
+  @DisplayName("주민 등록번호 오류로 인한 예외 2 건 발생 시험")
+  public void testCreatePassengerWithInvalidRrn() {
+    assertThrows(RuntimeException.class,
+        () -> {
+          new Passenger("201001-9234567", "임순남", "KR");
+        });
+    assertThrows(RuntimeException.class,
+        () -> {
+          new Passenger("201001-9234567", "러순녀", "KR");
+        });
   }
 
   @Test
