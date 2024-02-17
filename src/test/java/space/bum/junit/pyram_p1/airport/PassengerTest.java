@@ -1,5 +1,6 @@
 package space.bum.junit.pyram_p1.airport;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -23,6 +24,25 @@ class PassengerTest {
     assertThrows(RuntimeException.class,
         () -> {
           new Passenger("840108-9234567", "김정은", "KP");
+        });
+  }
+
+  @Test
+  @DisplayName("외국인 여성 국가 코드 오류 예외 시험")
+  public void testCreatePassengerWithInvalidCountryCode() {
+    assertThrows(RuntimeException.class,
+        () -> {
+          new Passenger("831010-6234567", "자넷 젝슨", "GJ");
+        });
+  }
+
+  @Test
+  @DisplayName("외국인 남성 외국인 번호 변경 오류 예외 시험")
+  public void testSetInvalidRrn() {
+    assertThrows(RuntimeException.class,
+        () -> {
+          (new Passenger("840108-5234567", "김정은", "US"))
+              .setIdentifier("840108-9234567");
         });
   }
 
