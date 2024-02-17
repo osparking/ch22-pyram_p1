@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.manning.junitbook.testpyramid.airport.Flight;
-
 class FlightTest {
 
   @Test
@@ -60,6 +58,16 @@ class FlightTest {
     assertEquals(true, flight.isTakenOff());
     assertEquals(true, flight.isLanded());
     assertEquals(false, flight.isFlying());
+  }
+
+  @Test
+  public void testChangeDestination() {
+    Flight flight = new Flight("AA1234", 50);
+    flight.setOrigin("제주");
+    flight.setDestination("김포");
+    flight.takeOff();
+    flight.land();
+    assertThrows(RuntimeException.class, () -> flight.setDestination("인천"));
   }
 
   @Test
