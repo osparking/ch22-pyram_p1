@@ -1,7 +1,10 @@
 package space.bum.junit.pyram_p1.airport;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,5 +29,25 @@ class FlightTest {
         () -> {
           new Flight("AA12345", 100);
         });
+  }
+
+  @Test
+  public void testValidFlightNumber() {
+    Flight flight = new Flight("AA345", 100);
+    assertNotNull(flight);
+    flight = new Flight("AA3456", 100);
+    assertNotNull(flight);
+  }
+
+  @Test
+  public void testAddPassengers() {
+    Flight flight = new Flight("AA1234", 50);
+    flight.setOrigin("인천");
+    flight.setDestination("상하이");
+
+    IntStream.range(0, flight.getSeats()).forEach(i -> flight.addPassenger());
+
+    assertEquals(50, flight.getPassengers());
+    assertThrows(RuntimeException.class, () -> flight.addPassenger());
   }
 }
