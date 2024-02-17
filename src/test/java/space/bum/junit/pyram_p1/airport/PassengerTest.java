@@ -14,6 +14,15 @@ import org.junit.jupiter.api.Test;
 
 class PassengerTest {
   @Test
+  @DisplayName("승객 객체 문자열 값이 예상대로 인지 시험")
+  public void testPassengerToString() {
+    Passenger passenger = new Passenger("831010-4234567", "최은서", "KR");
+    passenger.setName("오은서");
+    String passengerString = "승객: 오은서, 아이디: 831010-4234567, 출신국: KR";
+    assertEquals(passengerString, passenger.toString());
+  }
+
+  @Test
   @DisplayName("내국인 등록 번호 변경 성공 시험")
   public void testSetValidRrn() {
     Passenger passenger = new Passenger("831010-4234567", "최은서", "KR");
