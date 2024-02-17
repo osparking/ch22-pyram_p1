@@ -30,6 +30,24 @@ class PassengerTest {
   }
 
   @Test
+  @DisplayName("잘못된 국가 코드 처리 시험")
+  public void testSetInvalidCountryCode() {
+    assertThrows(RuntimeException.class,
+        () -> {
+          (new Passenger("840108-7234567", "이승만", "KR"))
+              .setCountryCode("PP");
+        });
+  }
+
+  @Test
+  @DisplayName("바른 국가 코드로 변경 시험")
+  public void testSetValidCountryCode() {
+    Passenger passenger = new Passenger("840108-1234567", "이승만", "KR");
+    passenger.setCountryCode("US");
+    assertEquals("US", passenger.getCountryCode());
+  }
+
+  @Test
   @DisplayName("외국인 등록번호 오류로 인한 예외 2 건 발생 시험")
   public void testCreatePassengerWithInvalidNonKrIdentifier() {
     assertThrows(RuntimeException.class,
