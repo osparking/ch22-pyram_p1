@@ -14,6 +14,19 @@ import org.junit.jupiter.api.Test;
 class PassengerTest {
 
   @Test
+  @DisplayName("외국인 등록번호 오류로 인한 예외 2 건 발생 시험")
+  public void testCreatePassengerWithInvalidNonKrIdentifier() {
+    assertThrows(RuntimeException.class,
+        () -> {
+          new Passenger("831010-0234567", "김여정", "KP");
+        });
+    assertThrows(RuntimeException.class,
+        () -> {
+          new Passenger("840108-9234567", "김정은", "KP");
+        });
+  }
+
+  @Test
   @DisplayName("내국인 남성 거주자 시험")
   public void testPassengerCreation() {
     Passenger passenger = new Passenger("201001-3234567", "임순남", "KR");
