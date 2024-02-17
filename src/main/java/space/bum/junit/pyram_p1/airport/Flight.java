@@ -3,7 +3,7 @@ package space.bum.junit.pyram_p1.airport;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class Flight {
+public class Flight {
   private String flightNumber;
   private int seats;
   private int passengers;
